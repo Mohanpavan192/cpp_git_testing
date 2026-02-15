@@ -1,0 +1,52 @@
+class Solution {
+public:
+    bool help(int i,int j,string s,string p){
+        if(i>=p.size()&&p[j+1]=='*'){
+            return true;
+        }
+       if(p[j]=='.' &&p[j+1]=='.' &&j==(p.size()-2)){
+            return true;
+        }
+        
+        
+        if(p[j+1]=='*'&&p[j]==s[i]){
+            return help(i+1,j,s,p);
+        }
+       if(i>=s.size()&&j>=p.size()){
+           return true;
+       }
+       if(i>=s.size()||j>=p.size()){
+         return false;  
+       }
+    else{
+    if(p[j]=='.'){
+    if(j<p.size()-1){
+        if(p[j+1]=='*'){
+           return help(i+1,j,s,p); 
+                }
+    }
+        return help(i+1,j+1,s,p);
+    }
+      if(s[i]==p[j]){
+          if(j<p.size()-1){
+          if(p[j+1]=='*'){
+             return help(i+1,j,s,p);
+          }
+      }
+          return help(i+1,j+1,s,p);
+    }    
+        else {
+            if(j<p.size()-1){
+                if(p[j+1]=='*'){
+                    return help(i,j+2,s,p);
+                }
+            }
+            return false;
+        }
+    }
+    }
+    bool isMatch(string s, string p) {
+return help(0,0,s,p);
+    }
+    
+};
